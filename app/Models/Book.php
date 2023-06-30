@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
@@ -25,5 +26,10 @@ class Book extends Model
     public function users_quote(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'book_user_quote');
+    }
+
+    public function publishers(): BelongsTo
+    {
+        return $this->belongsTo(Publisher::class);
     }
 }
