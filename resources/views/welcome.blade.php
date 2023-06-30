@@ -14,8 +14,8 @@
                 <h1 class="text-center">به "اسم سایت" خوش آمدید</h1>
                 <p class="lead text-center">با دوستداران کتاب ارتباط برقرار کرده و کتاب های جدید را کشف کنید</p>
                 <div class="text-center">
-                    <a href="/register" class="btn btn-secondary">ثبت نام</a>
-                    <a href="/login" class="btn btn-primary mr-2">ورود</a>
+                    <a href="/register" class="btn btn-primary">ثبت نام</a>
+                    <a href="/login" class="btn btn-secondary mr-2">ورود</a>
                 </div>
             </div>
         </div>
