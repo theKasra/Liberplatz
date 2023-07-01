@@ -31,7 +31,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', function () {
     return view('home');
-});
+})->middleware('auth')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
