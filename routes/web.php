@@ -39,4 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth', 'prevent-back-history'])->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+});
+
 require __DIR__.'/auth.php';
