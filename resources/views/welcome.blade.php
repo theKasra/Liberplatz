@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خوش آمدید</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/v5.0.2/Vazir.css" type="text/css">
     <style>
@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
-                <img src="{{url('/storage/images/logo.png')}}" alt="logo-img" style="margin-bottom: 20px;">
+                <img src="{{ asset('storage/images/logo.png') }}" alt="logo-img" style="margin-bottom: 20px;">
                 <p class="lead text-center">جایی که دوستداران کتاب جمع می‌شوند و ایده‌ها را به اشتراک می‌گذارند</p>
                 <div class="text-center">
                     <a href="/register" class="btn btn-primary">ثبت نام</a>
