@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
+    protected $fillable = [
+        'title',
+        'isbn',
+        'description',
+        'pages',
+        'publisher_id',
+        'year_of_publication',
+    ];
+
     public function authors(): BelongsToMany
     {
         return $this->belongsToMany(Author::class, 'author_book');
