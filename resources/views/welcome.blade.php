@@ -43,9 +43,8 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
-                <img src="/resources/images/logo.png" alt="logo-img" class="logo">
-                <h1 class="text-center">SocialBook</h1>
-                <p class="lead text-center">جایی که خوانندگان جمع می‌شوند و ایده‌ها را به اشتراک می‌گذارند</p>
+                <img src="{{url('/storage/images/logo.png')}}" alt="logo-img" style="margin-bottom: 20px;">
+                <p class="lead text-center">جایی که دوستداران کتاب جمع می‌شوند و ایده‌ها را به اشتراک می‌گذارند</p>
                 <div class="text-center">
                     <a href="/register" class="btn btn-primary">ثبت نام</a>
                     <a href="/login" class="btn btn-secondary mr-2">ورود</a>
