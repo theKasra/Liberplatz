@@ -4,10 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خوش آمدید</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/v5.0.2/Vazir.css" type="text/css">
     <style>
         body {
             text-align: right;
+            background-color: #1876f2;
+            background-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0.8) 100%);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Vazirmatn;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -15,8 +43,9 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
-                <h1 class="text-center">به "اسم سایت" خوش آمدید</h1>
-                <p class="lead text-center">با دوستداران کتاب ارتباط برقرار کرده و کتاب های جدید را کشف کنید</p>
+                <img src="/resources/images/logo.png" alt="logo-img" class="logo">
+                <h1 class="text-center">SocialBook</h1>
+                <p class="lead text-center">جایی که خوانندگان جمع می‌شوند و ایده‌ها را به اشتراک می‌گذارند</p>
                 <div class="text-center">
                     <a href="/register" class="btn btn-primary">ثبت نام</a>
                     <a href="/login" class="btn btn-secondary mr-2">ورود</a>
