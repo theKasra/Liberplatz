@@ -24,7 +24,9 @@ class Book extends Model
 
     public function users_status(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'book_user_status');
+        return $this->belongsToMany(User::class, 'book_user_status')
+                    ->withPivot('status', 'description')
+                    ->withTimestamps();
     }
 
     public function users_rating(): BelongsToMany
