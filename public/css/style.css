@@ -324,3 +324,27 @@ nav {
     background: #ccc;
     margin: 24px 0;
 }
+
+.book-container {
+    width: 300px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
+}
+
+.book-container img {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.book-container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.book-container .book-details {
+    font-size: 0.9rem;
+}

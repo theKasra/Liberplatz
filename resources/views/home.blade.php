@@ -79,6 +79,11 @@
               <p class="post-text">{{ $status->pivot->description }}</p>
               <hr style="opacity: 0.25;">
               <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $book->title }}</p>
+              @if ($status->pivot->status == true)
+                <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده شد</p>
+              @else
+                <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده نشد</p>
+              @endif
             @else
               @if ($status->pivot->status == 0)
                 <p class="post-text">کتاب {{ $book->title }} را نخوانده ام</p>
@@ -89,7 +94,7 @@
 
             <div class="post-row">
               <div class="activity-icons">
-                <div><img src="{{ asset('storage/images/comments.png') }}" alt="comments-img">دیدگاه ها</div>
+                <!-- <div><img src="{{ asset('storage/images/comments.png') }}" alt="comments-img">دیدگاه ها</div> -->
               </div>
             </div>
 
