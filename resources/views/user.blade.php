@@ -55,8 +55,15 @@
 
       <div class="info-column">
         <div class="profile-intro">
-          <h3>درباره من</h3>
-          <p class="intro-text">سلام. این یک تست است.</p>
+          <h3>لیست ها</h3>
+          <!-- <p class="intro-text">سلام. این یک تست است.</p> -->
+          <ul style="margin-right: 20px; margin-top: 5px;">
+            <li>
+              <a href="" style="text-decoration: none;">
+                کتاب های موردعلاقه
+              </a>
+            </li>
+          </ul>
           <hr>
         </div>
       </div>
@@ -139,8 +146,6 @@
 
           </div>
         @endforeach
-
-        <button type="button" class="load-more-btn">بارگذاری بیشتر</button>
 
       </div>
     </div>
