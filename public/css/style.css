@@ -158,6 +158,8 @@ nav {
     width: 100%;
     border: 0;
     outline: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
     background: transparent;
     resize: none;
@@ -249,6 +251,7 @@ nav {
 .profile-detail-row div h3 {
     font-size: 25px;
     font-weight: 600;
+    margin-right: 10px;
 }
 
 .profile-detail-row p {
@@ -261,6 +264,7 @@ nav {
     display: flex;
     align-items: center;
     color: #626262;
+    margin-right: 10px;
 }
 
 .profile-detail-left button {

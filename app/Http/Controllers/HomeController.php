@@ -21,7 +21,7 @@ class HomeController extends Controller
         //     ->orderBy('book_user_status.created_at')
         //     ->get();
 
-        $books = Book::with('users_status')->orderByDesc('id')->get();
+        $books = Book::with('users_status')->latest('id')->get();
 
         return view('home', compact('books'));
     }

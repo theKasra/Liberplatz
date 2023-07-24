@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,10 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 Route::post('/create-status', [StatusController::class, 'create'])->middleware('auth')->name('create.status');
 
 Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->name('book');
+
+Route::get('/user/{id}', [UserController::class, 'index'])->middleware('auth')->name('user');
+Route::post('/user/{id}/follow', [UserController::class, 'follow'])->middleware('auth')->name('user.follow');
+Route::post('/user/{id}/unfollow', [UserController::class, 'unfollow'])->middleware('auth')->name('user.unfollow');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

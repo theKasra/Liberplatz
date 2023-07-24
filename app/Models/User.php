@@ -53,14 +53,21 @@ class User extends Authenticatable
         return $this->belongsToMany(Publisher::class, 'publisher_user');
     }
 
-    public function followers(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'user_user', 'follower_id', 'following_id');
-    }
-
     public function followings(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_user', 'following_id', 'follower_id');
+        return $this->belongsToMany(User::class, 'user_user', 'follower_id', 'following_id')
+                    ->withTimestamps();
+    }
+
+    public function isFollowing(User $userToCheck): bool
+    {
+        return $this->followings->contains($userToCheck);
+    }
+
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_user', 'following_id', 'follower_id')
+                    ->withTimestamps();
     }
 
     public function books_status(): BelongsToMany
