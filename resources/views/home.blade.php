@@ -59,46 +59,46 @@
       </div>
 
       <!-- POSTS IN FEED -->
-      @foreach ($books as $book)
-        @foreach ($book->users_status as $status)
+        @foreach ($statuses as $status)
           <div class="post-container">
             <div class="user-profile">
               <img src="{{ asset('storage/images/profile-pic.png') }}" alt="user-profile">
                 <div>
                   <p>{{ $status->first_name ?? 'Unknown first name' }} {{ $status->last_name ?? 'Unknown last name' }}</p>
                   <p></p>
-                  <small>{{ $status->name ?? 'Unknown username' }}@</small>
+                  <small>{{ $status->user_name ?? 'Unknown username' }}@</small>
                   <br>
-                  <span>{{ $status->pivot->created_at }}</span>
+                  <span>{{ $status->created_at }}</span>
                 </div>
             </div>
 
-            @if (isset($status->pivot->description))
-              <p class="post-text">{{ $status->pivot->description }}</p>
+            @if (isset($status->description))
+              <p class="post-text">{{ $status->description }}</p>
               <hr style="opacity: 0.25;">
-              <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $book->title }}</p>
-              @if ($status->pivot->status == true)
+              <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $status->book_title }}</p>
+              @if ($status->status == true)
                 <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده شد</p>
               @else
                 <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده نشد</p>
               @endif
             @else
-              @if ($status->pivot->status == 0)
-                <p class="post-text">کتاب {{ $book->title }} را نخوانده ام</p>
+              @if ($status->status == 0)
+                <p class="post-text">کتاب {{ $status->book_title }} را نخوانده ام</p>
               @else
-                <p class="post-text">کتاب {{ $book->title }} را خوانده ام</p>
+                <p class="post-text">کتاب {{ $status->book_title }} را خوانده ام</p>
               @endif
             @endif
 
+            @if (Auth::user()->id == $status->user_id)
             <div class="post-row">
               <div class="activity-icons">
-                <!-- <div><img src="{{ asset('storage/images/comments.png') }}" alt="comments-img">دیدگاه ها</div> -->
+                <div><img src="{{ asset('storage/images/delete.png') }}" alt="comments-img">حذف</div>
               </div>
             </div>
+            @endif
 
           </div>
         @endforeach
-      @endforeach
 
       <button type="button" class="load-more-btn">بارگذاری بیشتر</button>
 
