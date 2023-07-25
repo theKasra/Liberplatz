@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         // $user = User::with('books_status')->latest('id')->find($id);
         
-        $user = Auth::user();
+        $user = User::find($id);
         $follower_count = $user->followers->count();
         $following_count = $user->followings->count();
 

@@ -1,11 +1,13 @@
 <nav>
     <div class="nav-right">
-      <a href="/home">
+      <a href="{{ route('home') }}">
         <img src="{{ asset('storage/images/logo.png') }}" alt="logo" class="logo">
       </a>
 
       <div class="nav-user-icon">
-        <img src="{{ asset('storage/images/profile-pic.png') }}" alt="user-img">
+        <a href="{{ route('user', ['id' => Auth::user()->id]) }}">
+          <img src="{{ asset('storage/images/profile-pic.png') }}" alt="user-img">
+        </a>
       </div>
 
       <ul>
