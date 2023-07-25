@@ -35,7 +35,7 @@
 
         <div class="post-input-container">
 
-          <form action="{{ route('create.status') }}" method="post">
+          <form action="{{ route('status.create') }}" method="post">
             @csrf
             <select name="book_id">
               @foreach ($books as $book)
@@ -92,7 +92,16 @@
             @if (Auth::user()->id == $status->user_id)
             <div class="post-row">
               <div class="activity-icons">
-                <div><img src="{{ asset('storage/images/delete.png') }}" alt="comments-img">حذف</div>
+                <div>
+                  <!-- <a href="{{ route('status.destroy', ['id' => $status->id]) }}" onclick="return confirm('آیا از حذف اطمینان دارید؟')"> -->
+                  <form action="{{ route('status.destroy', ['id' => $status->id]) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="background-color: transparent; border: none; padding: 0; cursor: pointer;" onclick="return confirm('آیا از حذف اطمینان دارید؟')">
+                      <img src="{{ asset('storage/images/delete.png') }}" alt="comments-img">حذف
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
             @endif

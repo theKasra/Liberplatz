@@ -34,7 +34,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
-Route::post('/create-status', [StatusController::class, 'create'])->middleware('auth')->name('create.status');
+
+Route::post('/create-status', [StatusController::class, 'create'])->middleware('auth')->name('status.create');
+Route::delete('/status/{id}', [StatusController::class, 'destroy'])->middleware('auth')->name('status.destroy');
 
 Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->name('book');
 

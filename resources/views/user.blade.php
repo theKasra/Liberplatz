@@ -21,6 +21,7 @@
           <img class="profile-detail-image" src="{{ asset('storage/images/profile-pic.png') }}" alt="user-profile">
           <div>
             <h3> {{ $user->first_name }} {{ $user->last_name }}</h3>
+            <h5 style="margin-right: 10px;"> {{ $user->name }}@</h5>
             <!-- <p>دنبال کنندگان</p>
                     <p>دنبال شوندگان</p> -->
             <a href="">دنبال کنندگان: {{ $following_count }}</a>
@@ -82,7 +83,7 @@
 
           <div class="post-input-container">
 
-            <form action="{{ route('create.status') }}" method="post">
+            <form action="{{ route('status.create') }}" method="post">
               @csrf
               <select name="book_id">
                 @foreach ($books as $book)
@@ -108,7 +109,7 @@
 
         <!-- STATUSES -->
 
-        @foreach ($user->books_status as $status)
+        @foreach ($statuses as $status)
           <div class="post-container">
             <div class="user-profile">
               <img src="{{ asset('storage/images/profile-pic.png') }}" alt="user-profile">
@@ -117,30 +118,38 @@
                 <p></p>
                 <small>{{ $user->name ?? 'Unknown username' }}@</small>
                 <br>
-                <span>{{ $status->pivot->created_at }}</span>
+                <span>{{ $status->created_at }}</span>
                 </div>
               </div>
 
-              @if (isset($status->pivot->description))
-                <p class="post-text">{{ $status->pivot->description }}</p>
+              @if (isset($status->description))
+                <p class="post-text">{{ $status->description }}</p>
                 <hr style="opacity: 0.25;">
-                <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $status->title }}</p>
-                @if ($status->pivot->status == true)
+                <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $status->book_title }}</p>
+                @if ($status->status == true)
                   <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده شد</p>
                 @else
                   <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده نشد</p>
                 @endif
               @else
                 @if ($status->status == 0)
-                  <p class="post-text">کتاب {{ $status->title }} را نخوانده ام</p>
+                  <p class="post-text">کتاب {{ $status->book_title }} را نخوانده ام</p>
                 @else
-                  <p class="post-text">کتاب {{ $status->title }} را خوانده ام</p>
+                  <p class="post-text">کتاب {{ $status->book_title }} را خوانده ام</p>
                 @endif
               @endif
 
             <div class="post-row">
               <div class="activity-icons">
-                <!-- <div><img src="{{ asset('storage/images/comments.png') }}" alt="comments-img">دیدگاه ها</div> -->
+                <div>
+                  <form action="{{ route('status.destroy', ['id' => $status->id]) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="background-color: transparent; border: none; padding: 0; cursor: pointer;" onclick="return confirm('آیا از حذف اطمینان دارید؟')">
+                      <img src="{{ asset('storage/images/delete.png') }}" alt="comments-img">حذف
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
 
