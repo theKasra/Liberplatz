@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
@@ -69,6 +70,22 @@ class RatingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = Auth::user();
+        $rating = DB::table('book_user_rating')
+            ->where('book_user_rating.id', $id)
+            ->where('book_user_rating.user_id', $user->id)
+            ->first();
+        
+        if($rating)
+        {
+            DB::table('book_user_rating')
+                ->where('book_user_rating.id', $id)
+                ->where('book_user_rating.user_id', $user->id)
+                ->delete();
+            
+            return redirect()->back()->with('success', 'نظر با موفقیت حذف شد');
+        }
+
+        return redirect()->back()->with('success', "خطا در حذف نظر");
     }
 }

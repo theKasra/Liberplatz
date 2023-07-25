@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -12,9 +14,28 @@ class BookController extends Controller
      */
     public function index(string $id)
     {
-        $book = Book::with(['authors', 'publishers', 'users_rating'])->orderByDesc('id')->findOrFail($id);
+        // not sorted
+        // $book = Book::with(['authors', 'publishers', 'users_rating'])->orderByDesc('id')->findOrFail($id);
 
-        return view('book', compact('book'));
+        $book = Book::find($id);
+
+        $author = DB::table('author_book')
+            ->join('authors', 'author_book.author_id', '=', 'authors.id')
+            ->select('author_book.*', 'authors.first_name AS first_name',
+                     'authors.last_name AS last_name')
+            ->where('author_book.book_id', $id)
+            ->get();
+
+        $publisher = DB::table('publishers')->find($book->publisher_id);
+
+        $ratings = DB::table('users')
+            ->select('users.*', 'book_user_rating.*')
+            ->join('book_user_rating', 'users.id', '=','book_user_rating.user_id')
+            ->where('book_user_rating.book_id', $id)
+            ->orderByDesc('book_user_rating.created_at')
+            ->get();
+
+        return view('book', compact('book', 'author', 'publisher', 'ratings'));
     }
 
     /**
