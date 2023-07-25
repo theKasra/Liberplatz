@@ -13,18 +13,14 @@
 
   <div class="container">
 
-    <div class="right-sidebar">
-      <div class="imp-links">
-      </div>
-    </div>
-
+    @include('partials._right-side-bar')
 
     <div class="main-content">
 
       <div class="write-post-container">
 
         <div class="book-container">
-          <img src="{{ asset('storage/images/hamlet.jpg') }}" alt="book-img">
+          <img src="{{ asset('storage/images/book.jpg') }}" alt="book-img">
         </div>
 
         <h2>{{ $book->title }}</h2>
@@ -54,10 +50,20 @@
 
         <div class="post-input-container">
 
-          <form action="{{ route('status.create') }}" method="post">
+          <form action="{{ route('book.rate', ['id' => $book->id]) }}" method="post">
             @csrf
 
+            <select name="rating">
+              @for ($i = 1; $i <= 5; $i++)
+                <option value="{{ $i }}">{{ $i }}</option>
+              @endfor
+            </select>
+
             <span>
+              <label style="margin-right: 15px; font-size: 15px;">
+                <input type="checkbox" id="statusCheckbox">
+                موردعلاقه
+              </label>
               <input type="hidden" name="status_checkbox_value" id="statusCheckboxValue" value="0">
             </span>
 

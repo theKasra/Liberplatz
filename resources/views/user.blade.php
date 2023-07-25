@@ -91,7 +91,7 @@
 
           <div class="post-input-container">
 
-            <form action="{{ route('status.create') }}" method="post">
+            <form action="{{ route('status.store') }}" method="post">
               @csrf
               <select name="book_id">
                 @foreach ($books as $book)

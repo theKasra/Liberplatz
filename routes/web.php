@@ -6,6 +6,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,21 +39,21 @@ Route::get('/dashboard', function () {
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->name('book');
-Route::post('/create-book', [BookController::class, 'create'])->middleware('auth')->name('book.create');
+Route::post('/book-store', [BookController::class, 'store'])->middleware('auth')->name('book.store');
 Route::delete('/book/{id}', [BookController::class, 'destroy'])->middleware('auth')->name('book.destroy');
 Route::patch('/book/{id}', [BookController::class, 'update'])->middleware('auth')->name('book.update');
 
 Route::get('/author/{id}', [AuthorController::class, 'index'])->middleware('auth')->name('author');
-Route::post('/create-author', [AuthorController::class, 'create'])->middleware('auth')->name('author.create');
+Route::post('/author-store', [AuthorController::class, 'store'])->middleware('auth')->name('author.store');
 Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->middleware('auth')->name('author.destroy');
 Route::put('/author/{id}', [AuthorController::class, 'update'])->middleware('auth')->name('author.update');
 
 Route::get('/publisher/{id}', [PublisherController::class, 'index'])->middleware('auth')->name('publisher');
-Route::post('/create-publisher', [PublisherController::class, 'create'])->middleware('auth')->name('publisher.create');
+Route::post('/publisher-store', [PublisherController::class, 'store'])->middleware('auth')->name('publisher.store');
 Route::delete('/publisher/{id}', [PublisherController::class, 'destroy'])->middleware('auth')->name('publisher.destroy');
 Route::put('/publisher/{id}', [PublisherController::class, 'update'])->middleware('auth')->name('publisher.update');
 
-Route::post('/create-status', [StatusController::class, 'create'])->middleware('auth')->name('status.create');
+Route::post('/status-store', [StatusController::class, 'store'])->middleware('auth')->name('status.store');
 Route::delete('/status/{id}', [StatusController::class, 'destroy'])->middleware('auth')->name('status.destroy');
 
 Route::get('/user/{id}', [UserController::class, 'index'])->middleware('auth')->name('user');
@@ -64,9 +65,9 @@ Route::get('/user/{id}/favorites', [UserController::class, 'showFavorites'])->mi
 Route::get('/user/{id}/comments', [UserController::class, 'showComments'])->middleware('auth')->name('user.comments');
 Route::get('/user/{id}/quotes', [UserController::class, 'showQuotes'])->middleware('auth')->name('user.quotes');
 
-Route::post('/rate-book/{id}', [RatingController::class, 'rate'])->middleware('auth')->name('book.rate');
+Route::post('/rate-book/{id}', [RatingController::class, 'store'])->middleware('auth')->name('book.rate');
 
-Route::post('/create-quote', [QuoteController::class, 'create'])->middleware('auth')->name('quote.create');
+Route::post('/quote-store', [QuoteController::class, 'store'])->middleware('auth')->name('quote.store');
 Route::delete('/quote/{id}', [QuoteController::class, 'destroy'])->middleware('auth')->name('quote.destroy');
 
 

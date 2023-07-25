@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class StatusController extends Controller
 {
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $user = Auth::user();
         $book = Book::find($request->input('book_id'));
