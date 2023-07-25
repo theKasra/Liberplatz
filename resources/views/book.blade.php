@@ -29,7 +29,11 @@
 
         <div class="book-details">
           <p><strong>شابک: </strong>{{ $book->isbn }}</p>
-          <p><strong>نویسنده: </strong>{{ $author[0]->first_name }} {{ $author[0]->last_name }}</p>
+          <p><strong>نویسنده: </strong>
+            <a href="{{ route('author', ['id' => $author[0]->id])}}">
+              {{ $author[0]->first_name }} {{ $author[0]->last_name }}
+            </a>
+          </p>
           <p><strong>توضیحات: </strong>{{ $book->description }}</p>
           <p><strong>تعداد صفحات: </strong>{{ $book->pages }}</p>
           <?php
@@ -38,7 +42,11 @@
 
           //$publisher = Publisher::find($book->publisher_id);
           ?>
-          <p><strong>ناشر: </strong>{{ $publisher->name ?? 'ERROR: Unknown publisher' }}</p>
+          <p><strong>ناشر: </strong>
+            <a href="{{ route('publisher', ['id' => $publisher->id]) }}">
+              {{ $publisher->name ?? 'ERROR: Unknown publisher' }}
+            </a>
+          </p>
           <p><strong>سال انتشار: </strong>{{ date('Y', strtotime($book->year_of_publication)) }}
         </div>
 
@@ -57,10 +65,13 @@
           <form action="{{ route('book.rate', ['id' => $book->id]) }}" method="post">
             @csrf
 
+            <span>
+              <label for="">امتیاز:</label>
             <select name="rating">
               @for ($i = 1; $i <= 5; $i++) <option value="{{ $i }}">{{ $i }}</option>
                 @endfor
             </select>
+            </span>
 
             <span>
               <label style="margin-right: 15px; font-size: 15px;">

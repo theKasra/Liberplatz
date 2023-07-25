@@ -72,6 +72,11 @@
                 دیدگاه ها
               </a>
             </li>
+            <li>
+              <a href="" style="text-decoration: none;">
+                بریده ها
+              </a>
+            </li>
           </ul>
           <hr>
         </div>
