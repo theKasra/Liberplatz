@@ -39,10 +39,15 @@ Route::post('/create-status', [StatusController::class, 'create'])->middleware('
 Route::delete('/status/{id}', [StatusController::class, 'destroy'])->middleware('auth')->name('status.destroy');
 
 Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->name('book');
+Route::post('/book/{id}', [UserController::class, 'rate'])->middleware('auth')->name('book.rate');
 
 Route::get('/user/{id}', [UserController::class, 'index'])->middleware('auth')->name('user');
 Route::post('/user/{id}/follow', [UserController::class, 'follow'])->middleware('auth')->name('user.follow');
 Route::post('/user/{id}/unfollow', [UserController::class, 'unfollow'])->middleware('auth')->name('user.unfollow');
+Route::get('/user/{id}/followings', [UserController::class, 'showFollowings'])->middleware('auth')->name('user.followings');
+Route::get('/user/{id}/followers', [UserController::class, 'showFollowers'])->middleware('auth')->name('user.followers');
+Route::get('/user/{id}/favorites', [UserController::class, 'showFavorites'])->middleware('auth')->name('user.favorites');
+Route::get('/user/{id}/comments', [UserController::class, 'showComments'])->middleware('auth')->name('user.comments');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

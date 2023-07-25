@@ -24,8 +24,8 @@
             <h5 style="margin-right: 10px;"> {{ $user->name }}@</h5>
             <!-- <p>دنبال کنندگان</p>
                     <p>دنبال شوندگان</p> -->
-            <a href="">دنبال کنندگان: {{ $following_count }}</a>
-            <a href="">دنبال شوندگان: {{ $follower_count }}</a>
+            <a href="{{ route('user.followings', ['id' => $user->id ]) }}">دنبال کنندگان: {{ $following_count }}</a>
+            <a href="{{ route('user.followers', ['id' => $user->id ]) }}">دنبال شوندگان: {{ $follower_count }}</a>
           </div>
         </div>
       </div>
@@ -53,15 +53,23 @@
 
     <div class="profile-info">
 
-
+      
       <div class="info-column">
+        <div>
+          @include('partials._right-side-bar')
+        </div>
         <div class="profile-intro">
-          <h3>لیست ها</h3>
+          <h3 style="margin-right: 30px; margin-bottom: 12px;">لیست های شخصی</h3>
           <!-- <p class="intro-text">سلام. این یک تست است.</p> -->
-          <ul style="margin-right: 20px; margin-top: 5px;">
+          <ul style="margin-right: 50px; margin-top: 5px;">
             <li>
               <a href="" style="text-decoration: none;">
                 کتاب های موردعلاقه
+              </a>
+            </li>
+            <li>
+              <a href="" style="text-decoration: none;">
+                دیدگاه ها
               </a>
             </li>
           </ul>
@@ -125,7 +133,9 @@
               @if (isset($status->description))
                 <p class="post-text">{{ $status->description }}</p>
                 <hr style="opacity: 0.25;">
-                <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $status->book_title }}</p>
+                <a href="{{ route('book', ['id' => $status->book_id]) }}" style="text-decoration: none; color: #626262;">
+                  <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $status->book_title }}</p>
+                </a>
                 @if ($status->status == true)
                   <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده شد</p>
                 @else
@@ -139,6 +149,7 @@
                 @endif
               @endif
 
+            @if (Auth::user()->id == $status->user_id)
             <div class="post-row">
               <div class="activity-icons">
                 <div>
@@ -152,6 +163,7 @@
                 </div>
               </div>
             </div>
+            @endif
 
           </div>
         @endforeach

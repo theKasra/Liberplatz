@@ -54,7 +54,7 @@
 
         <div class="post-input-container">
 
-          <form action="{{ route('create.status') }}" method="post">
+          <form action="{{ route('status.create') }}" method="post">
             @csrf
 
             <span>

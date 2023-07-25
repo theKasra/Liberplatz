@@ -65,4 +65,29 @@ class UserController extends Controller
         $user->followings()->detach($followed_user);
         return redirect()->back()->with('success', "دنبال کردن این کاربر با موفقیت متوقف شد");
     }
+
+    public function rate(string $id)
+    {
+
+    }
+
+    public function showFollowings(string $id)
+    {
+
+    }
+
+    public function showFollowers(string $id)
+    {
+        
+    }
+
+    public function showFavorites(string $id)
+    {
+        
+    }
+
+    public function showComments(string $id)
+    {
+        
+    }
 }

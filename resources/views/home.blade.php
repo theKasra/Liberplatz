@@ -13,13 +13,7 @@
 
   <div class="container">
 
-    <div class="right-sidebar">
-      <div class="imp-links">
-        <a href="{{ route('profile.edit') }}"><img src="images/publishers.png" alt="">ویرایش پروفایل</a>
-        <a href="#"><img src="images/publishers.png" alt="">لیست ناشر ها</a>
-        <a href="#"><img src="images/publishers.png" alt="">لیست کتاب ها</a>
-      </div>
-    </div>
+    @include('partials._right-side-bar')
 
 
     <div class="main-content">
@@ -62,11 +56,15 @@
         @foreach ($statuses as $status)
           <div class="post-container">
             <div class="user-profile">
-              <img src="{{ asset('storage/images/profile-pic.png') }}" alt="user-profile">
+              <a href="{{ route('user', ['id' => $status->user_id]) }}">
+                <img src="{{ asset('storage/images/profile-pic.png') }}" alt="user-profile">
+              </a>
                 <div>
-                  <p>{{ $status->first_name ?? 'Unknown first name' }} {{ $status->last_name ?? 'Unknown last name' }}</p>
-                  <p></p>
-                  <small>{{ $status->user_name ?? 'Unknown username' }}@</small>
+                  <a href="{{ route('user', ['id' => $status->user_id]) }}" style="text-decoration: none; color: #626262;">
+                    <p>{{ $status->first_name ?? 'Unknown first name' }} {{ $status->last_name ?? 'Unknown last name' }}</p>
+                    <p></p>
+                    <small>{{ $status->user_name ?? 'Unknown username' }}@</small>
+                  </a>
                   <br>
                   <span>{{ $status->created_at }}</span>
                 </div>
@@ -75,7 +73,9 @@
             @if (isset($status->description))
               <p class="post-text">{{ $status->description }}</p>
               <hr style="opacity: 0.25;">
-              <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $status->book_title }}</p>
+              <a href="{{ route('book', ['id' => $status->book_id]) }}" style="text-decoration: none; color: #626262;">
+                <p style="font-size: 13px; padding: 5px; text-align: left;">{{ $status->book_title }}</p>
+              </a>
               @if ($status->status == true)
                 <p style="font-size: 13px; padding: 5px; text-align: left;">خوانده شد</p>
               @else
