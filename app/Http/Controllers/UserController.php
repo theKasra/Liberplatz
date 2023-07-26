@@ -66,19 +66,24 @@ class UserController extends Controller
         return redirect()->back()->with('success', "دنبال کردن این کاربر با موفقیت متوقف شد");
     }
 
-    public function rate(string $id)
-    {
-
-    }
-
     public function showFollowings(string $id)
     {
+        $user = User::find($id);
+        $follower_count = $user->followers->count();
+        $following_count = $user->followings->count();
+        $followings = $user->followings;
 
+        return view('followings', compact('user', 'followings', 'follower_count', 'following_count'));
     }
 
     public function showFollowers(string $id)
     {
-        
+        $user = User::find($id);
+        $follower_count = $user->followers->count();
+        $following_count = $user->followings->count();
+        $followers = $user->followers;
+
+        return view('followers', compact('user', 'followers', 'follower_count', 'following_count'));
     }
 
     public function showFavorites(string $id)
@@ -86,6 +91,7 @@ class UserController extends Controller
         $user = User::find($id);
         $follower_count = $user->followers->count();
         $following_count = $user->followings->count();
+
         $favorite_books = DB::table('books')
             ->join('book_user_rating', 'books.id', '=', 'book_user_rating.book_id')
             ->select('books.*', 'book_user_rating.is_favorite')
@@ -98,6 +104,10 @@ class UserController extends Controller
 
     public function showComments(string $id)
     {
-        
+        $user = User::find($id);
+        $follower_count = $user->followers->count();
+        $following_count = $user->followings->count();
+
+        return view('comments', compact('follower_count', 'following_count'));
     }
 }
