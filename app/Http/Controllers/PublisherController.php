@@ -10,9 +10,12 @@ class PublisherController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
-        //
+        $publisher = Publisher::find($id);
+        $books = $publisher->books;
+
+        return view('publisher', compact('publisher', 'books'));
     }
 
     /**

@@ -50,7 +50,13 @@ class User extends Authenticatable
 
     public function publishers(): BelongsToMany
     {
-        return $this->belongsToMany(Publisher::class, 'publisher_user');
+        return $this->belongsToMany(Publisher::class, 'publisher_user')
+                    ->withTimestamps();
+    }
+
+    public function isFollowingPublisher(Publisher $publisherToCheck): bool
+    {
+        return $this->publishers->contains($publisherToCheck);
     }
 
     public function followings(): BelongsToMany

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Publisher;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +65,36 @@ class UserController extends Controller
 
         $user->followings()->detach($followed_user);
         return redirect()->back()->with('success', "دنبال کردن این کاربر با موفقیت متوقف شد");
+    }
+
+    public function followPublisher(string $id)
+    {
+        $user = Auth::user();
+
+        if(!$user->relationLoaded('publishers'))
+        {
+            $user->load('publishers');
+        }
+
+        $following_publisher = Publisher::find($id);
+
+        $user->publishers()->attach($following_publisher);
+        return redirect()->back()->with('success', "دنبال کردن ناشر با موفقیت انجام شد");
+    }
+
+    public function unfollowPublisher(string $id)
+    {
+        $user = Auth::user();
+
+        if(!$user->relationLoaded('publishers'))
+        {
+            $user->load('publishers');
+        }
+
+        $followed_publisher = Publisher::find($id);
+
+        $user->publishers()->detach($followed_publisher);
+        return redirect()->back()->with('success', "دنبال کردن ناشر با موفقیت متوقف شد");
     }
 
     public function showFollowings(string $id)

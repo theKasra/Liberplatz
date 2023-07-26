@@ -20,7 +20,8 @@ class Publisher extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'publisher_user');
+        return $this->belongsToMany(User::class, 'publisher_user')
+                    ->withTimestamps();
     }
 
     public function books(): HasMany
