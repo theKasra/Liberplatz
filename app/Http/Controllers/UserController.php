@@ -117,4 +117,21 @@ class UserController extends Controller
 
         return view('comments', compact('follower_count', 'following_count', 'user', 'comments'));
     }
+
+    public function showQuotes(string $id)
+    {
+        $user = User::find($id);
+        $books = Book::all();
+        $follower_count = $user->followers->count();
+        $following_count = $user->followings->count();
+
+        $quotes = DB::table('books')
+            ->join('book_user_quote', 'books.id', '=', 'book_user_quote.book_id')
+            ->select('book_user_quote.*', 'books.title AS book_title')
+            ->where('book_user_quote.user_id', $user->id)
+            ->orderByDesc('book_user_quote.created_at')
+            ->get();
+        
+        return view('quotes', compact('user', 'follower_count', 'following_count', 'quotes', 'books'));
+    }
 }

@@ -86,6 +86,8 @@ class User extends Authenticatable
 
     public function books_quote(): BelongsToMany
     {
-        return $this->belongsToMany(Book::class, 'book_user_quote');
+        return $this->belongsToMany(Book::class, 'book_user_quote')
+                    ->withPivot('quote')
+                    ->withTimestamps();
     }
 }

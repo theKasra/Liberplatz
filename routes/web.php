@@ -6,6 +6,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -68,7 +69,7 @@ Route::get('/user/{id}/quotes', [UserController::class, 'showQuotes'])->middlewa
 Route::post('/rate-book/{id}', [RatingController::class, 'store'])->middleware('auth')->name('book.rate');
 Route::delete('/book/{id}', [RatingController::class, 'destroy'])->middleware('auth')->name('book.destroy.rating');
 
-Route::post('/user/{id}/quote-store', [QuoteController::class, 'store'])->middleware('auth')->name('quote.store');
+Route::post('/user/quotes/quote-store', [QuoteController::class, 'store'])->middleware('auth')->name('quote.store');
 Route::delete('/quote/{id}', [QuoteController::class, 'destroy'])->middleware('auth')->name('quote.destroy');
 
 
