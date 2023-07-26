@@ -19,6 +19,14 @@
 
       <div class="post-column">
 
+      <div class="write-post-container">
+          <div class="user-profile">
+            <div>
+              <h2>بریده ها</h2>
+            </div>
+          </div>
+        </div>
+
         @if (Auth::user()->id == $user->id)
         <div class="write-post-container">
           <div class="user-profile">
@@ -48,13 +56,7 @@
         @endif
 
         <!-- QUOTES -->
-        <div class="write-post-container">
-          <div class="user-profile">
-            <div>
-              <h2>بریده ها</h2>
-            </div>
-          </div>
-        </div>
+        
 
         @foreach ($quotes as $quote)
           <div class="post-container">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publisher;
 use Illuminate\Http\Request;
 
 class PublisherController extends Controller
@@ -60,5 +61,12 @@ class PublisherController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showAllPublishers()
+    {
+        $publishers = Publisher::all();
+
+        return view('publishers', compact('publishers'));
     }
 }
