@@ -108,6 +108,13 @@ class UserController extends Controller
         $follower_count = $user->followers->count();
         $following_count = $user->followings->count();
 
-        return view('comments', compact('follower_count', 'following_count'));
+        $comments = DB::table('books')
+            ->join('book_user_rating', 'books.id', '=', 'book_user_rating.book_id')
+            ->select('book_user_rating.*', 'books.title AS book_title')
+            ->where('book_user_rating.user_id', $user->id)
+            ->orderByDesc('book_user_rating.created_at')
+            ->get();
+
+        return view('comments', compact('follower_count', 'following_count', 'user', 'comments'));
     }
 }

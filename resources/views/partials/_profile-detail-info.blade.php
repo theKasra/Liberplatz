@@ -48,12 +48,12 @@
           </a>
         </li>
         <li>
-          <a href="" style="text-decoration: none;">
+          <a href="{{ route('user.comments', ['id' => $user->id]) }}" style="text-decoration: none;">
             دیدگاه ها
           </a>
         </li>
         <li>
-          <a href="" style="text-decoration: none;">
+          <a href="{{ route('user.quotes', ['id' => $user->id]) }}" style="text-decoration: none;">
             بریده ها
           </a>
         </li>

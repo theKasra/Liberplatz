@@ -90,7 +90,6 @@
 
       <!-- COMMENTS -->
 
-      <!-- just like status -->
       @foreach ($ratings as $rating)
       <div class="post-container">
         <div class="user-profile">
@@ -110,6 +109,10 @@
 
         @if (isset($rating->comment))
         <p class="post-text">{{ $rating->comment }}</p>
+        <p style="font-size: 13px; text-align: left;">امتیاز {{ $rating->rating }} از 5</p>
+          @if ($rating->is_favorite == true)
+            <p style="font-size: 13px; text-align: left;">این کتاب موردعلاقه کاربر است</p>
+          @endif
         @endif
         
         
