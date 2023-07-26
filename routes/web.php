@@ -43,6 +43,7 @@ Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->
 Route::post('/book-store', [BookController::class, 'store'])->middleware('auth')->name('book.store');
 Route::delete('/book/{id}', [BookController::class, 'destroy'])->middleware('auth')->name('book.destroy');
 Route::patch('/book/{id}', [BookController::class, 'update'])->middleware('auth')->name('book.update');
+Route::get('/books', [BookController::class, 'showAllBooks'])->middleware('auth')->name('books');
 
 Route::get('/author/{id}', [AuthorController::class, 'index'])->middleware('auth')->name('author');
 Route::post('/author-store', [AuthorController::class, 'store'])->middleware('auth')->name('author.store');

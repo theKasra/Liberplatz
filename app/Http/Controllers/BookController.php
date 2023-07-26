@@ -85,4 +85,11 @@ class BookController extends Controller
     {
         //
     }
+
+    public function showAllBooks()
+    {
+        $books = Book::all();
+
+        return view('books', compact('books'));
+    }
 }
