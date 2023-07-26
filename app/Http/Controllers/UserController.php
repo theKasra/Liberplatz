@@ -83,7 +83,17 @@ class UserController extends Controller
 
     public function showFavorites(string $id)
     {
+        $user = User::find($id);
+        $follower_count = $user->followers->count();
+        $following_count = $user->followings->count();
+        $favorite_books = DB::table('books')
+            ->join('book_user_rating', 'books.id', '=', 'book_user_rating.book_id')
+            ->select('books.*', 'book_user_rating.is_favorite')
+            ->where('book_user_rating.user_id', $id)
+            ->where('book_user_rating.is_favorite', true)
+            ->get();
         
+        return view('favorites', compact('favorite_books', 'user', 'follower_count', 'following_count'));
     }
 
     public function showComments(string $id)

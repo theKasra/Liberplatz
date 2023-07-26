@@ -68,7 +68,7 @@ Route::get('/user/{id}/quotes', [UserController::class, 'showQuotes'])->middlewa
 Route::post('/rate-book/{id}', [RatingController::class, 'store'])->middleware('auth')->name('book.rate');
 Route::delete('/book/{id}', [RatingController::class, 'destroy'])->middleware('auth')->name('book.destroy.rating');
 
-Route::post('/quote-store', [QuoteController::class, 'store'])->middleware('auth')->name('quote.store');
+Route::post('/user/{id}/quote-store', [QuoteController::class, 'store'])->middleware('auth')->name('quote.store');
 Route::delete('/quote/{id}', [QuoteController::class, 'destroy'])->middleware('auth')->name('quote.destroy');
 
 

@@ -60,10 +60,9 @@
         </div>
         <div class="profile-intro">
           <h3 style="margin-right: 30px; margin-bottom: 12px;">لیست های شخصی</h3>
-          <!-- <p class="intro-text">سلام. این یک تست است.</p> -->
           <ul style="margin-right: 50px; margin-top: 5px;">
             <li>
-              <a href="" style="text-decoration: none;">
+              <a href="{{ route('user.favorites', ['id' => $user->id]) }}" style="text-decoration: none;">
                 کتاب های موردعلاقه
               </a>
             </li>
