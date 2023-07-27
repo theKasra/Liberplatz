@@ -64,6 +64,7 @@ Route::post('/user/{id}/follow', [UserController::class, 'follow'])->middleware(
 Route::post('/user/{id}/unfollow', [UserController::class, 'unfollow'])->middleware('auth')->name('user.unfollow');
 Route::post('/follow-publisher/{id}', [UserController::class, 'followPublisher'])->middleware('auth')->name('user.follow.publisher');
 Route::post('/unfollow-publisher/{id}', [UserController::class, 'unfollowPublisher'])->middleware('auth')->name('user.unfollow.publisher');
+Route::get('/user/{id}/following-publishers', [UserController::class, 'showFollowingPublishers'])->middleware('auth')->name('user.following.publishers');
 Route::get('/user/{id}/followings', [UserController::class, 'showFollowings'])->middleware('auth')->name('user.followings');
 Route::get('/user/{id}/followers', [UserController::class, 'showFollowers'])->middleware('auth')->name('user.followers');
 Route::get('/user/{id}/favorites', [UserController::class, 'showFavorites'])->middleware('auth')->name('user.favorites');

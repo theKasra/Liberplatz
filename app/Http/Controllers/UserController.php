@@ -165,4 +165,9 @@ class UserController extends Controller
         
         return view('quotes', compact('user', 'follower_count', 'following_count', 'quotes', 'books'));
     }
+
+    public function showFollowingPublishers(string $id)
+    {
+        
+    }
 }

@@ -43,6 +43,11 @@
       <h3 style="margin-right: 30px; margin-bottom: 12px;">لیست های شخصی</h3>
       <ul style="margin-right: 50px; margin-top: 5px;">
         <li>
+          <a href="{{ route('user.following.publishers', ['id' => $user->id]) }}" style="text-decoration: none;">
+            ناشرهای دنبال شده
+          </a>
+        </li>
+        <li>
           <a href="{{ route('user.favorites', ['id' => $user->id]) }}" style="text-decoration: none;">
             کتاب های موردعلاقه
           </a>
