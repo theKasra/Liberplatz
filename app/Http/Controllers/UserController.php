@@ -168,6 +168,16 @@ class UserController extends Controller
 
     public function showFollowingPublishers(string $id)
     {
+        $user = User::find($id);
+        $follower_count = $user->followers->count();
+        $following_count = $user->followings->count();
+
+        $following_publishers = DB::table('publishers')
+            ->join('publisher_user', 'publishers.id', '=', 'publisher_user.publisher_id')
+            ->select('publishers.*')
+            ->where('publisher_user.user_id', $user->id)
+            ->get();
         
+        return view('following-publishers', compact('user', 'follower_count', 'following_count', 'following_publishers'));
     }
 }
