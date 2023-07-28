@@ -352,3 +352,17 @@ nav {
 .book-container .book-details {
     font-size: 0.9rem;
 }
+
+.logo-register-login-container {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.logo-register-login-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
