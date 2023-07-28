@@ -9,6 +9,9 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserController;
+use App\Models\Author;
+use App\Models\Book;
+use App\Models\Publisher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +40,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     if(Auth::user()->is_admin)
     {
-        return view('dashboard');
+        $authors = Author::all();
+        $books = Book::all();
+        $publishers = Publisher::all();
+
+        return view('dashboard', compact('authors', 'books', 'publishers'));
     }
     else return redirect()->back();
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -48,7 +55,9 @@ Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->
 Route::get('/book-create', [BookController::class, 'create'])->middleware('auth')->name('book.create');
 Route::post('/book-store', [BookController::class, 'store'])->middleware('auth')->name('book.store');
 Route::delete('/book/{id}', [BookController::class, 'destroy'])->middleware('auth')->name('book.destroy');
-Route::patch('/book/{id}', [BookController::class, 'update'])->middleware('auth')->name('book.update');
+Route::get('/book-edit/{id}', [BookController::class, 'edit'])->middleware('auth')->name('book.edit');
+Route::get('/book-edit-list', [BookController::class, 'showAllForEdit'])->middleware('auth')->name('book.edit.list');
+Route::post('/book-update/{id}', [BookController::class, 'update'])->middleware('auth')->name('book.update');
 Route::get('/books', [BookController::class, 'showAllBooks'])->middleware('auth')->name('books');
 
 Route::get('/author/{id}', [AuthorController::class, 'index'])->middleware('auth')->name('author');

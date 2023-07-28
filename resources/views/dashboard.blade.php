@@ -13,7 +13,7 @@
                     <div class="dashboard-container">
                         <div>
                             @if (session('success'))
-                            <div style="color: green;">
+                            <div style="color: green; margin-bottom: 10px;">
                                 {{ session('success') }}
                             </div>
                             @endif
@@ -26,7 +26,7 @@
                         <div>
                             <label>کتاب‌ها:</label>
                             <a href="{{ route('book.create') }}"><button>جدید</button></a>
-                            <button>ویرایش</button>
+                            <a href="{{ route('book.edit.list') }}"><button>ویرایش</button></a>
                             <button>حذف</button>
                         </div>
 

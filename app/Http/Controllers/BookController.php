@@ -63,7 +63,7 @@ class BookController extends Controller
     {
         $request->validate([
             'title' => 'required|max:255',
-            'isbn' => 'required|max:50',
+            'isbn' => 'required|max:255',
             'description' => 'required',
             'pages' => 'required|integer',
             'publisher' => 'required',
@@ -94,7 +94,14 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+    }
+
+    public function showAllForEdit()
+    {
+        $books = Book::all();
+
+        return view('book-edit-list', compact('books'));
     }
 
     /**
@@ -102,7 +109,20 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book = Book::find($id);
+        $author = DB::table('author_book')
+            ->join('authors', 'author_book.author_id', '=', 'authors.id')
+            ->select('author_book.*', 'authors.first_name AS first_name',
+                     'authors.last_name AS last_name')
+            ->where('author_book.book_id', $id)
+            ->get();
+
+        $publisher = DB::table('publishers')->find($book->publisher_id);
+        
+        $authors = Author::all();
+        $publishers = Publisher::all();
+
+        return view('book-edit', compact('book', 'author', 'publisher', 'authors', 'publishers'));
     }
 
     /**
@@ -110,7 +130,44 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'isbn' => 'required|max:255',
+            'description' => 'required',
+            'pages' => 'required|integer',
+            'publisher' => 'required',
+            'year_of_publication' => 'required|date',
+            'author' => 'required'
+        ]);
+
+        $book = Book::find($id);
+        $author = DB::table('author_book')
+            ->join('authors', 'author_book.author_id', '=', 'authors.id')
+            ->select('authors.id')
+            ->where('author_book.book_id', $id)
+            ->get();
+
+        $updatedPivotData = [
+            'author_id' => $request->author,
+            'book_id' => $book->id,
+        ];
+
+        DB::table('author_book')
+            ->where('author_book.book_id', $book->id)
+            ->where('author_book.author_id', $author[0]->id)
+            ->update($updatedPivotData);
+
+        $book->update([
+            'title' => $request->title,
+            'isbn' => $request->isbn,
+            'description' => $request->description,
+            'pages' => $request->pages,
+            'publisher' => $request->publisher,
+            'year_of_publication' => $request->year_of_publication,
+        ]);
+        
+        return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت ویرایش شد');
     }
 
     /**
