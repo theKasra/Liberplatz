@@ -175,7 +175,22 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::find($id);
+
+        DB::table('author_book')
+            ->where('author_book.book_id', $book->id)
+            ->delete();
+        
+        $book->delete();
+
+        return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت حذف شد');
+    }
+
+    public function showAllForDelete()
+    {
+        $books = Book::all();
+
+        return view('book-delete-list', compact('books'));
     }
 
     public function showAllBooks()

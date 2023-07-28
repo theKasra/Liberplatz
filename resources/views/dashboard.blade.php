@@ -27,7 +27,7 @@
                             <label>کتاب‌ها:</label>
                             <a href="{{ route('book.create') }}"><button>جدید</button></a>
                             <a href="{{ route('book.edit.list') }}"><button>ویرایش</button></a>
-                            <button>حذف</button>
+                            <a href="{{ route('book.delete.list') }}"><button>حذف</button></a>
                         </div>
 
                         <div>

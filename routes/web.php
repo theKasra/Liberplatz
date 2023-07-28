@@ -54,7 +54,8 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->name('book');
 Route::get('/book-create', [BookController::class, 'create'])->middleware('auth')->name('book.create');
 Route::post('/book-store', [BookController::class, 'store'])->middleware('auth')->name('book.store');
-Route::delete('/book/{id}', [BookController::class, 'destroy'])->middleware('auth')->name('book.destroy');
+Route::get('/book-delete', [BookController::class, 'showAllForDelete'])->middleware('auth')->name('book.delete.list');
+Route::delete('/book-delete/{id}', [BookController::class, 'destroy'])->middleware('auth')->name('book.destroy');
 Route::get('/book-edit/{id}', [BookController::class, 'edit'])->middleware('auth')->name('book.edit');
 Route::get('/book-edit-list', [BookController::class, 'showAllForEdit'])->middleware('auth')->name('book.edit.list');
 Route::post('/book-update/{id}', [BookController::class, 'update'])->middleware('auth')->name('book.update');
