@@ -32,7 +32,7 @@
 
                         <div>
                             <label>انتشارات:</label>
-                            <button>جدید</button>
+                            <a href="{{ route('publisher.create') }}"><button>جدید</button></a>
                             <button>ویرایش</button>
                             <button>حذف</button>
                         </div>

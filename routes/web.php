@@ -72,6 +72,7 @@ Route::post('/author-update/{id}', [AuthorController::class, 'update'])->middlew
 Route::get('/authors', [AuthorController::class, 'showAllAuthors'])->middleware('auth')->name('author.all');
 
 Route::get('/publisher/{id}', [PublisherController::class, 'index'])->middleware('auth')->name('publisher');
+Route::get('/publisher-create', [PublisherController::class, 'create'])->middleware('auth')->name('publisher.create');
 Route::post('/publisher-store', [PublisherController::class, 'store'])->middleware('auth')->name('publisher.store');
 Route::delete('/publisher/{id}', [PublisherController::class, 'destroy'])->middleware('auth')->name('publisher.destroy');
 Route::put('/publisher/{id}', [PublisherController::class, 'update'])->middleware('auth')->name('publisher.update');
