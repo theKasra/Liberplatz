@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthorController extends Controller
 {
@@ -23,7 +24,12 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::user()->is_admin)
+        {
+            return view('author-create');
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -31,7 +37,20 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'biography' => 'required',
+        ]);
+
+        $author = new Author;
+        $author->first_name = $request->first_name;
+        $author->last_name = $request->last_name;
+        $author->biography = $request->biography;
+
+        $author->save();
+
+        return redirect()->route('dashboard')->with('success', 'نویسنده با موفقیت ایجاد شد');
     }
 
     /**

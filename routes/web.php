@@ -62,9 +62,14 @@ Route::post('/book-update/{id}', [BookController::class, 'update'])->middleware(
 Route::get('/books', [BookController::class, 'showAllBooks'])->middleware('auth')->name('books');
 
 Route::get('/author/{id}', [AuthorController::class, 'index'])->middleware('auth')->name('author');
+Route::get('/author-create', [AuthorController::class, 'create'])->middleware('auth')->name('author.create');
 Route::post('/author-store', [AuthorController::class, 'store'])->middleware('auth')->name('author.store');
-Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->middleware('auth')->name('author.destroy');
-Route::put('/author/{id}', [AuthorController::class, 'update'])->middleware('auth')->name('author.update');
+Route::get('/author-delete', [AuthorController::class, 'showAllForDelete'])->middleware('auth')->name('author.delete.list');
+Route::delete('/author-delete/{id}', [AuthorController::class, 'destroy'])->middleware('auth')->name('author.destroy');
+Route::get('/author-edit-list', [Author::class, 'showAllForEdit'])->middleware('auth')->name('author.edit.list');
+Route::get('/author-edit/{id}', [AuthorController::class, 'edit'])->middleware('auth')->name('author.edit');
+Route::post('/author-update/{id}', [AuthorController::class, 'update'])->middleware('auth')->name('author.update');
+Route::get('/authors', [AuthorController::class, 'showAllAuthors'])->middleware('auth')->name('author.all');
 
 Route::get('/publisher/{id}', [PublisherController::class, 'index'])->middleware('auth')->name('publisher');
 Route::post('/publisher-store', [PublisherController::class, 'store'])->middleware('auth')->name('publisher.store');
