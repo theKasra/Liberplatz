@@ -66,7 +66,7 @@ Route::get('/author-create', [AuthorController::class, 'create'])->middleware('a
 Route::post('/author-store', [AuthorController::class, 'store'])->middleware('auth')->name('author.store');
 Route::get('/author-delete', [AuthorController::class, 'showAllForDelete'])->middleware('auth')->name('author.delete.list');
 Route::delete('/author-delete/{id}', [AuthorController::class, 'destroy'])->middleware('auth')->name('author.destroy');
-Route::get('/author-edit-list', [Author::class, 'showAllForEdit'])->middleware('auth')->name('author.edit.list');
+Route::get('/author-edit-list', [AuthorController::class, 'showAllForEdit'])->middleware('auth')->name('author.edit.list');
 Route::get('/author-edit/{id}', [AuthorController::class, 'edit'])->middleware('auth')->name('author.edit');
 Route::post('/author-update/{id}', [AuthorController::class, 'update'])->middleware('auth')->name('author.update');
 Route::get('/authors', [AuthorController::class, 'showAllAuthors'])->middleware('auth')->name('author.all');

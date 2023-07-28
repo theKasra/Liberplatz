@@ -19,7 +19,7 @@
                             @endif
                             <label>نویسندگان:</label>
                             <a href="{{ route('author.create') }}"><button>جدید</button></a>
-                            <button>ویرایش</button>
+                            <a href="{{ route('author.edit.list') }}"><button>ویرایش</button></a>
                             <button>حذف</button>
                         </div>
 

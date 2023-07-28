@@ -61,12 +61,29 @@ class AuthorController extends Controller
         //
     }
 
+    public function showAllForEdit()
+    {
+        if(Auth::user()->is_admin)
+        {
+            $authors = Author::all();
+            return view('author-edit-list', compact('authors'));
+        }
+
+        return redirect()->back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        if(Auth::user()->is_admin)
+        {
+            $author = Author::find($id);
+            return view('author-edit', compact('author'));
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -74,7 +91,21 @@ class AuthorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'biography' => 'required',
+        ]);
+
+        $author = Author::find($id);
+
+        $author->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'biography' => $request->biography,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'نویسنده با موفقیت ویرایش شد');
     }
 
     /**
