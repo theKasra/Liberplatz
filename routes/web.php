@@ -45,6 +45,7 @@ Route::get('/dashboard', function () {
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::get('/book/{id}', [BookController::class, 'index'])->middleware('auth')->name('book');
+Route::get('/book-create', [BookController::class, 'create'])->middleware('auth')->name('book.create');
 Route::post('/book-store', [BookController::class, 'store'])->middleware('auth')->name('book.store');
 Route::delete('/book/{id}', [BookController::class, 'destroy'])->middleware('auth')->name('book.destroy');
 Route::patch('/book/{id}', [BookController::class, 'update'])->middleware('auth')->name('book.update');

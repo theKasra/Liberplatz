@@ -25,7 +25,8 @@ nav {
     margin-right: 45px;
 }
 
-.nav-left, .nav-right {
+.nav-left,
+.nav-right {
     display: flex;
     align-items: center;
 }
@@ -42,7 +43,7 @@ nav {
 }
 
 .nav-user-icon img {
-    width:  40px;
+    width: 40px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -146,7 +147,8 @@ nav {
 
 .user-profile small {
     font-size: 12px;
-    direction: ltr; /*not working*/
+    direction: ltr;
+    /*not working*/
 }
 
 .post-input-container {
@@ -365,4 +367,59 @@ nav {
     width: 100%;
     height: auto;
     border-radius: 5px;
+}
+
+.dashboard-container {
+    text-align: center;
+}
+
+.dashboard-container button {
+    background: #1876f2;
+    border: 0;
+    outline: 0;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    border-radius: 3px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.dashboard-container h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dashboard-container form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dashboard-container input[type="text"],
+.dashboard-container input[type="number"],
+.dashboard-container textarea,
+.dashboard-container select,
+.dashboard-container input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.dashboard-container textarea {
+    resize: vertical;
+    text-align: right;
 }

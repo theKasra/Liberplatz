@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Publisher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -43,7 +45,15 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::user()->is_admin)
+        {
+            $publishers = Publisher::all();
+            $authors = Author::all();
+
+            return view('book-create', compact('publishers', 'authors'));
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -51,7 +61,32 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'isbn' => 'required|max:50',
+            'description' => 'required',
+            'pages' => 'required|integer',
+            'publisher' => 'required',
+            'year_of_publication' => 'required|date',
+            'author' => 'required'
+        ]);
+
+        $book = new Book;
+        $book->title = $request->title;
+        $book->isbn = $request->isbn;
+        $book->description = $request->description;
+        $book->pages = $request->pages;
+        $book->publisher_id = $request->publisher;
+        $book->year_of_publication = $request->year_of_publication;
+
+        $book->save();
+
+        DB::table('author_book')->insert([
+            'author_id' => $request->author,
+            'book_id' => $book->id,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت ایجاد شد');
     }
 
     /**
