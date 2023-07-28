@@ -20,7 +20,7 @@
                             <label>نویسندگان:</label>
                             <a href="{{ route('author.create') }}"><button>جدید</button></a>
                             <a href="{{ route('author.edit.list') }}"><button>ویرایش</button></a>
-                            <button>حذف</button>
+                            <a href="{{ route('author.delete.list') }}"><button>حذف</button></a>
                         </div>
 
                         <div>

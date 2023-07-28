@@ -72,6 +72,17 @@ class AuthorController extends Controller
         return redirect()->back();
     }
 
+    public function showAllForDelete()
+    {
+        if(Auth::user()->is_admin)
+        {
+            $authors = Author::all();
+            return view('author-delete-list', compact('authors'));
+        }
+
+        return redirect()->back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -113,6 +124,8 @@ class AuthorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $author = Author::find($id);
+        $author->delete();
+        return redirect()->route('dashboard')->with('success', 'نویسنده با موفقیت حذف شد');
     }
 }
