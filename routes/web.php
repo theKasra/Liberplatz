@@ -9,6 +9,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    if(Auth::user()->is_admin)
+    {
+        return view('dashboard');
+    }
+    else return redirect()->back();
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');

@@ -17,6 +17,13 @@
       <a style="text-decoration: none;" href="{{ route('user.followers', ['id' => Auth::user()->id]) }}">
         <li><img src="{{ asset('storage/images/people.png') }}" alt="people-img"></li>
       </a>
+
+      @if (Auth::user()->is_admin)
+        <a style="text-decoration: none;" href="{{ route('dashboard') }}">
+          <li><img src="{{ asset('storage/images/admin.png') }}" alt="admin-img"></li>
+        </a>
+      @endif
+      
       <li>
         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <img src="{{ asset('storage/images/logout.png') }}" alt="logout-img">

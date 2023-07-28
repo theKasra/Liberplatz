@@ -19,7 +19,7 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
 
-            @if (Auth::user()->name != 'admin')
+            @if (!Auth::user()->is_admin)
             @include('partials._navbar')
             @else
             @include('layouts.navigation')
