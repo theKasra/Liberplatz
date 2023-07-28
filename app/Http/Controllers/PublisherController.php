@@ -70,12 +70,29 @@ class PublisherController extends Controller
         //
     }
 
+    public function showAllForEdit()
+    {
+        if(Auth::user()->is_admin)
+        {
+            $publishers = Publisher::all();
+            return view('publisher-edit-list', compact('publishers'));
+        }
+
+        return redirect()->back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        if(Auth::user()->is_admin)
+        {
+            $publisher = Publisher::find($id);
+            return view('publisher-edit', compact('publisher'));
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -83,7 +100,29 @@ class PublisherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'phone' => 'required|max:255',
+            'province' => 'required|max:255',
+            'city' => 'required|max:255',
+            'street' => 'required|max:255',
+            'zipcode' => 'required|max:255',
+        ]);
+
+        $publisher = Publisher::find($id);
+
+        $publisher->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'province' => $request->province,
+            'city' => $request->city,
+            'street' => $request->street,
+            'zipcode' => $request->zipcode,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'انتشارات با موفقیت ویرایش شد');
     }
 
     /**
