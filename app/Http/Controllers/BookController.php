@@ -99,9 +99,14 @@ class BookController extends Controller
 
     public function showAllForEdit()
     {
-        $books = Book::all();
+        if(Auth::user()->is_admin)
+        {
+            $books = Book::all();
 
-        return view('book-edit-list', compact('books'));
+            return view('book-edit-list', compact('books'));
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -109,20 +114,25 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        $book = Book::find($id);
-        $author = DB::table('author_book')
-            ->join('authors', 'author_book.author_id', '=', 'authors.id')
-            ->select('author_book.*', 'authors.first_name AS first_name',
-                     'authors.last_name AS last_name')
-            ->where('author_book.book_id', $id)
-            ->get();
+        if(Auth::user()->is_admin)
+        {
+            $book = Book::find($id);
+            $author = DB::table('author_book')
+                ->join('authors', 'author_book.author_id', '=', 'authors.id')
+                ->select('author_book.*', 'authors.first_name AS first_name',
+                        'authors.last_name AS last_name')
+                ->where('author_book.book_id', $id)
+                ->get();
 
-        $publisher = DB::table('publishers')->find($book->publisher_id);
-        
-        $authors = Author::all();
-        $publishers = Publisher::all();
+            $publisher = DB::table('publishers')->find($book->publisher_id);
+            
+            $authors = Author::all();
+            $publishers = Publisher::all();
 
-        return view('book-edit', compact('book', 'author', 'publisher', 'authors', 'publishers'));
+            return view('book-edit', compact('book', 'author', 'publisher', 'authors', 'publishers'));
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -188,9 +198,14 @@ class BookController extends Controller
 
     public function showAllForDelete()
     {
-        $books = Book::all();
+        if(Auth::user()->is_admin)
+        {
+            $books = Book::all();
 
-        return view('book-delete-list', compact('books'));
+            return view('book-delete-list', compact('books'));
+        }
+
+        return redirect()->back();
     }
 
     public function showAllBooks()
