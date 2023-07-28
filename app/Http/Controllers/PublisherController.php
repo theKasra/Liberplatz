@@ -81,6 +81,17 @@ class PublisherController extends Controller
         return redirect()->back();
     }
 
+    public function showAllForDelete()
+    {
+        if(Auth::user()->is_admin)
+        {
+            $publishers = Publisher::all();
+            return view('publisher-delete-list', compact('publishers'));
+        }
+
+        return redirect()->back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -130,7 +141,9 @@ class PublisherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $publisher = Publisher::find($id);
+        $publisher->delete();
+        return redirect()->route('dashboard')->with('success', 'انتشارات با موفقیت حذف شد');
     }
 
     public function showAllPublishers()
