@@ -81,10 +81,12 @@ class BookController extends Controller
 
         $book->save();
 
-        DB::table('author_book')->insert([
-            'author_id' => $request->author,
-            'book_id' => $book->id,
-        ]);
+        // DB::table('author_book')->insert([
+        //     'author_book.author_id' => $request->author,
+        //     'author_book.book_id' => $book->id,
+        // ]);
+
+        $book->authors()->attach($request->author);
 
         return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت ایجاد شد');
     }
@@ -152,21 +154,21 @@ class BookController extends Controller
         ]);
 
         $book = Book::find($id);
-        $author = DB::table('author_book')
-            ->join('authors', 'author_book.author_id', '=', 'authors.id')
-            ->select('authors.id')
-            ->where('author_book.book_id', $id)
-            ->get();
+        // $author = DB::table('author_book')
+        //     ->join('authors', 'author_book.author_id', '=', 'authors.id')
+        //     ->select('authors.id')
+        //     ->where('author_book.book_id', $id)
+        //     ->get();
 
-        $updatedPivotData = [
-            'author_id' => $request->author,
-            'book_id' => $book->id,
-        ];
+        // $updatedPivotData = [
+        //     'author_id' => $request->author,
+        //     'book_id' => $book->id,
+        // ];
 
-        DB::table('author_book')
-            ->where('author_book.book_id', $book->id)
-            ->where('author_book.author_id', $author[0]->id)
-            ->update($updatedPivotData);
+        // DB::table('author_book')
+        //     ->where('author_book.book_id', $book->id)
+        //     ->where('author_book.author_id', $author[0]->id)
+        //     ->update($updatedPivotData);
 
         $book->update([
             'title' => $request->title,
@@ -176,6 +178,8 @@ class BookController extends Controller
             'publisher' => $request->publisher,
             'year_of_publication' => $request->year_of_publication,
         ]);
+
+        $book->authors()->sync($request->input('author'));
         
         return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت ویرایش شد');
     }
@@ -187,9 +191,11 @@ class BookController extends Controller
     {
         $book = Book::find($id);
 
-        DB::table('author_book')
-            ->where('author_book.book_id', $book->id)
-            ->delete();
+        // DB::table('author_book')
+        //     ->where('author_book.book_id', $book->id)
+        //     ->delete();
+
+        $book->authors()->detach();
         
         $book->delete();
 
