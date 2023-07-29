@@ -40,11 +40,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     if(Auth::user()->is_admin)
     {
-        $authors = Author::all();
-        $books = Book::all();
-        $publishers = Publisher::all();
+        // $authors = Author::all();
+        // $books = Book::all();
+        // $publishers = Publisher::all();
 
-        return view('dashboard', compact('authors', 'books', 'publishers'));
+        return view('dashboard');
     }
     else return redirect()->back();
 })->middleware(['auth', 'verified'])->name('dashboard');
