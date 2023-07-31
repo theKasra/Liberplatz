@@ -63,7 +63,7 @@
               تلفن: {{ $publisher->phone }}
             </li>
             <li>
-              آدرس: {{ $publisher->province }}، {{ $publisher->city }}، خیابان {{ $publisher->street }}
+              آدرس: استان {{ $publisher->province }}، {{ $publisher->city }}، خیابان {{ $publisher->street }}
             </li>
             <li>
               کد پستی: {{ $publisher->zipcode }}
