@@ -127,7 +127,7 @@ class BookController extends Controller
                 ->get();
 
             $publisher = DB::table('publishers')->find($book->publisher_id);
-            
+
             $authors = Author::all();
             $publishers = Publisher::all();
 
@@ -180,7 +180,7 @@ class BookController extends Controller
         ]);
 
         $book->authors()->sync($request->input('author'));
-        
+
         return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت ویرایش شد');
     }
 
@@ -196,7 +196,7 @@ class BookController extends Controller
         //     ->delete();
 
         $book->authors()->detach();
-        
+
         $book->delete();
 
         return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت حذف شد');
@@ -219,5 +219,13 @@ class BookController extends Controller
         $books = Book::all();
 
         return view('books', compact('books'));
+    }
+    
+    public function searchBook(Request $request)
+    {
+        return DB::table('books')
+            ->select('books.*')
+            ->where('books.title', 'like', '%'.$request->title.'%')
+            ->get();
     }
 }

@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index(string $id)
     {
         // $user = User::with('books_status')->latest('id')->find($id);
-        
+
         $user = User::find($id);
         $follower_count = $user->followers->count();
         $following_count = $user->followings->count();
@@ -31,7 +31,7 @@ class UserController extends Controller
             ->where('users.id', $user->id)
             ->orderByDesc('book_user_status.created_at')
             ->get();
-        
+
         $books = Book::all();
 
         return view('user', compact('user', 'statuses', 'follower_count', 'following_count', 'books'));
@@ -129,7 +129,7 @@ class UserController extends Controller
             ->where('book_user_rating.user_id', $id)
             ->where('book_user_rating.is_favorite', true)
             ->get();
-        
+
         return view('favorites', compact('favorite_books', 'user', 'follower_count', 'following_count'));
     }
 
@@ -162,7 +162,7 @@ class UserController extends Controller
             ->where('book_user_quote.user_id', $user->id)
             ->orderByDesc('book_user_quote.created_at')
             ->get();
-        
+
         return view('quotes', compact('user', 'follower_count', 'following_count', 'quotes', 'books'));
     }
 
@@ -177,7 +177,7 @@ class UserController extends Controller
             ->select('publishers.*')
             ->where('publisher_user.user_id', $user->id)
             ->get();
-        
+
         return view('following-publishers', compact('user', 'follower_count', 'following_count', 'following_publishers'));
     }
 }
