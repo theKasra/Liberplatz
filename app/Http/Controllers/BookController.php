@@ -81,12 +81,12 @@ class BookController extends Controller
 
         $book->save();
 
-        DB::table('author_book')->insert([
-            'author_book.author_id' => $request->author,
-            'author_book.book_id' => $book->id,
-        ]);
+//        DB::table('author_book')->insert([
+//            'author_book.author_id' => $request->author,
+//            'author_book.book_id' => $book->id,
+//        ]);
 
-        //$book->authors()->attach($request->author);
+        $book->authors()->attach($request->author);
 
         return redirect()->route('dashboard')->with('success', 'کتاب با موفقیت ایجاد شد');
     }
@@ -220,7 +220,7 @@ class BookController extends Controller
 
         return view('books', compact('books'));
     }
-    
+
     public function searchBook(Request $request)
     {
         return DB::table('books')
