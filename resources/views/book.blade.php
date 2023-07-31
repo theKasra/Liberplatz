@@ -30,7 +30,7 @@
         <div class="book-details">
           <p><strong>شابک: </strong>{{ $book->isbn }}</p>
           <p><strong>نویسنده: </strong>
-            <a href="{{ route('author', ['id' => $author[0]->id])}}">
+            <a href="{{ route('author', ['id' => $author[0]->author_id])}}">
               {{ $author[0]->first_name }} {{ $author[0]->last_name }}
             </a>
           </p>

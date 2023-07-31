@@ -21,11 +21,8 @@
 
                             <label for="author">نویسنده:</label>
                             <select name="author" required>
-                                <option value="{{ $author[0]->id }}">{{ $author[0]->first_name }} {{ $author[0]->last_name }}</option>
                                 @foreach ($authors as $other_author)
-                                    @if ($author[0]->id != $other_author->id)
-                                        <option value="{{ $other_author->id }}">{{ $other_author->first_name }} {{ $other_author->last_name }}</option>
-                                    @endif
+                                    <option value="{{ $other_author->id }}" <?php if ($author[0]->author_id == $other_author->id) { echo "selected"; } ?>>{{ $other_author->first_name }} {{ $other_author->last_name }}</option>
                                 @endforeach
                             </select>
                             <br>
@@ -44,11 +41,8 @@
 
                             <label for="publisher">ناشر:</label>
                             <select name="publisher" required>
-                                <option value="{{ $publisher->id }}">نشر {{ $publisher->name }}</option>
                                 @foreach ($publishers as $other_publisher)
-                                    @if ($publisher->id != $other_publisher->id)
-                                        <option value="{{ $other_publisher->id }}">نشر {{ $other_publisher->name }}</option>
-                                    @endif
+                                    <option value="{{ $other_publisher->id }}" <?php if ($publisher->id == $other_publisher->id) { echo "selected"; } ?>>نشر {{ $other_publisher->name }}</option>
                                 @endforeach
                             </select>
                             <br>
